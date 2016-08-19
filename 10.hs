@@ -18,7 +18,6 @@ main = hspec $ do
             encodeModified "aaaabccaadeeee" `shouldBe` [Multiple 4 'a',Single 'b',Multiple 2 'c',Multiple 2 'a',Single 'd',Multiple 4 'e']
 
 pack :: Eq a => [a] -> [[a]]
-
 pack []  = []
 pack [x] = [[x]]
 pack (x:y:xs) = if x == y
@@ -27,22 +26,11 @@ pack (x:y:xs) = if x == y
 
 
 encode :: [Char] -> [(Int, Char)]
-
---encode = length . pack
-
---encode [a] ==> Char  = [(1,'a')(2,'b')]
---
-
 encode [] = []
 encode x  = (count,letter):(encode . dropWhile (== letter) $ x)
     where
         letter = (head . head . pack $ x)
         count  = (length . head . pack $ x)
-
-encode' [] = []
-encode' (x:xs) = (length $ x : takeWhile (==x) xs, x)
-                 : encode' (dropWhile (==x) xs)
-
 
 -- foldr solution...
 
