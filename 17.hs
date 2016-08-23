@@ -25,7 +25,7 @@ main = hspec $ do
 
 split :: [a] -> Int -> ([a],[a])
 split xs     0 = ([],xs)
-split (x:xs) n = ([x] ++ fst (split xs (n-1)),snd (split xs (n-1)))
+split (x:xs) n | n > 0 = ([x] ++ fst (split xs (n-1)),snd (split xs (n-1)))
 
 dropEvery :: [a] -> Int -> [a]
 dropEvery xs n = if (length chunk) < n
